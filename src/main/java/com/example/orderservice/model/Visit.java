@@ -1,0 +1,48 @@
+package com.example.orderservice.model;
+
+import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "visits")
+public class Visit {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_visit")
+    @JsonProperty("identificador de la visita")
+    private Long id;
+
+    @Column(name = "date", nullable = false)
+    @JsonProperty("fecha de la visita")
+    private LocalDateTime date;
+    
+    @Column(name = "pending")
+    @JsonProperty("visita pendiente")
+    private Boolean pending;
+
+    // Relaciones
+    @Column(name = "customer_id")
+    private Long customerId;
+
+    @Column(name = "gym_id")
+    private Long gymId;
+}
